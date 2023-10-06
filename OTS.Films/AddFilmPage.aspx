@@ -8,10 +8,12 @@
         <asp:TextBox ID="txtFilmTitle" runat="server" CssClass="form-control" />
 
         <asp:Label ID="Label1" runat="server" Text="Режиссер фильма:" CssClass="form-label" />
-        <asp:dropdownlist id="ddlDirectors" runat="server"></asp:dropdownlist>
+        <asp:ListBox id="lbDirectors" runat="server" SelectionMode="Multiple" DataValueField="id" DataTextField="name">
+        </asp:ListBox>
 
         <asp:Label ID="Label2" runat="server" Text="Жанр фильма:" CssClass="form-label" />
-        <asp:ListBox id="lbGenres" runat="server" SelectionMode="Multiple"></asp:ListBox>
+        <asp:ListBox id="lbGenres" runat="server" SelectionMode="Multiple" DataValueField="id" DataTextField="name">
+        </asp:ListBox>
 
         <asp:Button ID="btnSaveFilm" runat="server" Text="Отправить" OnClick="btnSave_Click" />
         <br />

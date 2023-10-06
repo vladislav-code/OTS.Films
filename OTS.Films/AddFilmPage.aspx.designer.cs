@@ -42,13 +42,13 @@ namespace OTS.Films
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// ddlDirectors элемент управления.
+        /// lbDirectors элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDirectors;
+        protected global::System.Web.UI.WebControls.ListBox lbDirectors;
 
         /// <summary>
         /// Label2 элемент управления.

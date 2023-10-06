@@ -20,9 +20,9 @@ namespace OTS.Films
             if (!IsPostBack)
             {
 
-                GenreRepository genreRepo = new GenreRepository();
+                Genre genre = new Genre();
 
-                List<string> genres = new List<string>();
+                List<Genre> genres = new List<Genre>();
                 string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
                 DataTable dt = new DataTable();
