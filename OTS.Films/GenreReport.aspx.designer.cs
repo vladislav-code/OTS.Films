@@ -11,34 +11,25 @@ namespace OTS.Films
 {
 
 
-    public partial class AddDirectorPage
+    public partial class GenreReport
     {
 
         /// <summary>
-        /// lblDirectorName элемент управления.
+        /// Label элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDirectorName;
+        protected global::System.Web.UI.WebControls.Label Label;
 
         /// <summary>
-        /// txtDirectorName элемент управления.
+        /// ddlGenres элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDirectorName;
-
-        /// <summary>
-        /// btnSaveDirector элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveDirector;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGenres;
     }
 }

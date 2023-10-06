@@ -70,7 +70,6 @@
                                 <li><a class="dropdown-item" runat="server" href="~/DirectorFilms">Фильмы режиссера</a></li>
                             </ul>
                         </li>
-                        <li><a class="nav-link" runat="server" href="~/Contact">Связаться</a></li>
                     </ul>
                 </div>
             </div>

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using BLToolkit.Data;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace OTS.Films.Models
 {
@@ -19,22 +19,19 @@ namespace OTS.Films.Models
         {
             List<string> directors = new List<string>();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            DbManager.AddConnectionString(connectionString);
+            using (DbManager db = new DbManager())
             {
-                connection.Open();
+                var query = db.SetCommand("SELECT name FROM Directors");
 
-                string query = "SELECT name FROM Directors";
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = query.ExecuteReader())
                 {
-                    directors.Add(reader["name"].ToString());
+                    while (reader.Read())
+                    {
+                        directors.Add(reader["name"].ToString());
+                    }
                 }
-
-                reader.Close();
             }
-
             return directors;
         }
     }

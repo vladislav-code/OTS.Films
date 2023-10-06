@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +6,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using OTS.Films.Models;
+using BLToolkit.Data;
 
 namespace OTS.Films
 {
     public partial class AddGenrePage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-        protected void btnAddFilm_Click(object sender, EventArgs e)
         {
 
         }
@@ -27,21 +23,18 @@ namespace OTS.Films
             //string genreTitle = txtGenreTitle.Text;
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             // Создание подключения к базе данных и выполнение операции вставки
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            DbManager.AddConnectionString(connectionString);
+
+            using (DbManager db = new DbManager())
             {
-                connection.Open();
-
                 // SQL-запрос для вставки данных
-                string query = "INSERT INTO Genres (name) VALUES (@name)";
+                var query = db.SetCommand("INSERT INTO Genres (name) VALUES (@name)", db.Parameter("@name", genreName)).ExecuteNonQuery();
 
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-                    // параметры для предотвращения SQL-инъекций
-                    cmd.Parameters.AddWithValue("@name", genreName);
+                ////Создание объекта Director и установка свойства Name
+                //Director director = new Director { Name = directorName };
 
-                    // Выполнение запроса
-                    cmd.ExecuteNonQuery();
-                }
+                // // Вставка данных в таблицу с использованием BLToolkit
+                // db.Insert(director);
             }
 
             // Очистка элементов управления после вставки

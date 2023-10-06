@@ -14,9 +14,6 @@
                 <asp:Repeater ID="MyRepeater" runat="server">
                     <ItemTemplate>
                         <tr>
-                            <%--<td rowspan='<%# Eval("rowspan") %>'>
-                                <%# Eval("Имя") %>
-                            </td>--%>
                             <%--Выводим имя только в тех ячейках, где rowspan != 0 - признак того, что данная ячейка была объединена--%>
                             <%# Convert.ToInt32(Eval("rowspan")) > 0 ? "<td rowspan='" + Eval("rowspan") + "'>" + Eval("Имя") + "</td>" : "" %> 
                             <td><%# Eval("Жанр") %></td>

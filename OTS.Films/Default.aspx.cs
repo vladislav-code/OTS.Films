@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using OTS.Films.Models;
 using Microsoft.SqlServer;
 using System.Data;
-using System.Data.SqlClient;
+using BLToolkit.Data;
 
 namespace OTS.Films
 {
@@ -26,21 +26,19 @@ namespace OTS.Films
                 dt.Columns.Add("Режиссер", typeof(string));
                 dt.Columns.Add("Жанр", typeof(string));
                 dt.Columns.Add("rowspan", typeof(int));
+                DbManager.AddConnectionString(connectionString);
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (DbManager db = new DbManager())
                 {
-                    connection.Open();
 
-                    string query = "SELECT Films.title AS Название, Directors.name AS Режиссер, Genres.name AS Жанр FROM Directors INNER JOIN (Films INNER JOIN Genres ON Films.id = Genres.film_id) ON Directors.film_id = Films.id GROUP BY Films.title, Directors.name, Genres.name;";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
+                    var query = db.SetCommand("SELECT Films.title AS Название, Directors.name AS Режиссер, Genres.name AS Жанр FROM Directors INNER JOIN (Films INNER JOIN Genres ON Films.id = Genres.film_id) ON Directors.film_id = Films.id GROUP BY Films.title, Directors.name, Genres.name;");
+                    using (var reader = query.ExecuteReader())
                     {
-                        dt.Rows.Add(reader["Название"].ToString(), reader["Режиссер"].ToString(), reader["Жанр"].ToString());
+                        while (reader.Read())
+                        {
+                            dt.Rows.Add(reader["Название"].ToString(), reader["Режиссер"].ToString(), reader["Жанр"].ToString());
+                        }
                     }
-
-                    reader.Close();
                 }
 
                 int rowCount = dt.Rows.Count;
