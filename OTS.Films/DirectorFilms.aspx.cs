@@ -32,14 +32,20 @@ namespace OTS.Films
 
                 using (DbManager db = new DbManager())
                 {
-
-                    var query = db.SetCommand("SELECT Directors.name AS Имя, Genres.name AS Жанр, COUNT(Films.id) AS Количество FROM Directors INNER JOIN (Films INNER JOIN Genres ON Films.id = Genres.film_id) ON Directors.film_id = Films.id GROUP BY Directors.name, Genres.name;");
-                    using (var reader = query.ExecuteReader())
+                    try
                     {
-                        while (reader.Read())
+                        var query = db.SetCommand("SELECT Directors.name AS Имя, Genres.name AS Жанр, COUNT(Films.id) AS Количество FROM Directors INNER JOIN (Films INNER JOIN Genres ON Films.id = Genres.film_id) ON Directors.film_id = Films.id GROUP BY Directors.name, Genres.name;");
+                        using (var reader = query.ExecuteReader())
                         {
-                            dt.Rows.Add(reader["Имя"].ToString(), reader["Жанр"].ToString(), Convert.ToInt32(reader["Количество"]));
+                            while (reader.Read())
+                            {
+                                dt.Rows.Add(reader["Имя"].ToString(), reader["Жанр"].ToString(), Convert.ToInt32(reader["Количество"]));
+                            }
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("An error occured " + ex.Message);
                     }
                 }
 

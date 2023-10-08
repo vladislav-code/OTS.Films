@@ -66,6 +66,7 @@
                                 Отчет
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="createDropdown">
+                                <li><a class="dropdown-item" runat="server" href="~/GenreReport">Отчет по жанру</a></li>
                                 <li><a class="dropdown-item" runat="server" href="~/CReport">Сводный отчет</a></li>
                                 <li><a class="dropdown-item" runat="server" href="~/DirectorFilms">Фильмы режиссера</a></li>
                             </ul>

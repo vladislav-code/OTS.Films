@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using OTS.Films.Models;
 using BLToolkit.Data;
+using BLToolkit.Data.Linq;
 
 namespace OTS.Films
 {
@@ -27,14 +28,20 @@ namespace OTS.Films
 
             using (DbManager db = new DbManager())
             {
-                // SQL-запрос для вставки данных
-                var query = db.SetCommand("INSERT INTO Genres (name) VALUES (@name)", db.Parameter("@name", genreName)).ExecuteNonQuery();
+                try
+                {
+                    // SQL-запрос для вставки данных
+                    // var query = db.SetCommand("INSERT INTO Genres (name) VALUES (@name)", db.Parameter("@name", genreName)).ExecuteNonQuery();
 
-                ////Создание объекта Director и установка свойства Name
-                //Director director = new Director { Name = directorName };
+                    Genre genre = new Genre { name = genreName };
 
-                // // Вставка данных в таблицу с использованием BLToolkit
-                // db.Insert(director);
+                    // Вставка данных в таблицу с использованием BLToolkit
+                    db.Insert(genre);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occured " + ex.Message);
+                }
             }
 
             // Очистка элементов управления после вставки

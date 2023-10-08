@@ -5,11 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.EntityFrameworkCore;
 using OTS.Films.Models;
-using Microsoft.SqlServer;
-using System.Data.SqlClient;
 using System.Data;
+using BLToolkit.Data;
 
 namespace OTS.Films
 {
@@ -19,34 +17,36 @@ namespace OTS.Films
         {
             if (!IsPostBack)
             {
-
-                Genre genre = new Genre();
-
-                List<Genre> genres = new List<Genre>();
                 string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Название", typeof(string));
                 dt.Columns.Add("Количество", typeof(int));
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (DbManager db = new DbManager())
                 {
-                    connection.Open();
-
-                    string query = "SELECT name AS Название, COUNT(film_id) AS Количество FROM Genres GROUP BY name";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
+                    try
                     {
-                        dt.Rows.Add(reader["Название"].ToString(), Convert.ToInt32(reader["Количество"]));
+                        List<Genre> genres = db.GetTable<Genre>().ToList();
+
+                        var query = db.SetCommand("SELECT name AS Название, COUNT(film_id) AS Количество FROM Genres GROUP BY name");
+                        using (var reader = query.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                dt.Rows.Add(reader["Название"].ToString(), Convert.ToInt32(reader["Количество"]));
+                            }
+                            reader.Close();
+                        }
+
+                        MyRepeater.DataSource = dt;
+                        MyRepeater.DataBind();
                     }
-
-                    reader.Close();
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("An error occured " + ex.Message);
+                    }
                 }
-
-                MyRepeater.DataSource = dt;
-                MyRepeater.DataBind();
             }
         }
     }
