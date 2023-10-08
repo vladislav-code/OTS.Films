@@ -1,4 +1,4 @@
-﻿<%@ Title="Добавить новый жанр" Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddGenrePage.aspx.cs" Inherits="OTS.Films.AddGenrePage" %>
+﻿<%@ Page Title="Добавить новый жанр" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddGenrePage.aspx.cs" Inherits="OTS.Films.AddGenrePage" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
         <!-- Форма для добавления жанра -->

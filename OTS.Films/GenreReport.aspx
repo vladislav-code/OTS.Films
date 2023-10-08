@@ -1,11 +1,9 @@
-﻿<%@ Title="Отчет по жанрам" Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GenreReport.aspx.cs" Inherits="OTS.Films.GenreReport" %>
+﻿<%@ Page Title="Отчет по жанрам" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GenreReport.aspx.cs" Inherits="OTS.Films.GenreReport" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
         <!-- Отчет по жанру -->
 
         <h3>Выберите жанр</h3>
-        <asp:Label ID="lblDirectorName" runat="server" Text="Имя режиссера:" CssClass="form-label" />
-        <asp:TextBox ID="txtDirectorName" runat="server" CssClass="form-control" />
         <asp:DropDownList ID="ddlGenre" runat="server" DataTextField="name" DataValueField="id"></asp:DropDownList>
 
         <table class="my-table">

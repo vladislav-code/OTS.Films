@@ -15,24 +15,6 @@ namespace OTS.Films
     {
 
         /// <summary>
-        /// lblDirectorName элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDirectorName;
-
-        /// <summary>
-        /// txtDirectorName элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDirectorName;
-
-        /// <summary>
         /// ddlGenre элемент управления.
         /// </summary>
         /// <remarks>
