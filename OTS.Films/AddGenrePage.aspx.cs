@@ -21,18 +21,11 @@ namespace OTS.Films
         {
             // Получение данных из элементов управления
             string genreName = txtGenreName.Text;
-            //string genreTitle = txtGenreTitle.Text;
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            // Создание подключения к базе данных и выполнение операции вставки
-            DbManager.AddConnectionString(connectionString);
 
             using (DbManager db = new DbManager())
             {
                 try
                 {
-                    // SQL-запрос для вставки данных
-                    // var query = db.SetCommand("INSERT INTO Genres (name) VALUES (@name)", db.Parameter("@name", genreName)).ExecuteNonQuery();
-
                     Genre genre = new Genre { name = genreName };
 
                     // Вставка данных в таблицу с использованием BLToolkit
@@ -46,9 +39,6 @@ namespace OTS.Films
 
             // Очистка элементов управления после вставки
             txtGenreName.Text = string.Empty;
-
-            // Закрыть соединение???
-            // Сообщение об операции
         }
     }
 }

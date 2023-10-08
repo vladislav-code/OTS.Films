@@ -17,8 +17,6 @@ namespace OTS.Films
         {
             if (!IsPostBack)
             {
-                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Название", typeof(string));
                 dt.Columns.Add("Количество", typeof(int));

@@ -19,14 +19,11 @@ namespace OTS.Films
         {
             if (!IsPostBack)
             {
-                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Название", typeof(string));
                 dt.Columns.Add("Режиссер", typeof(string));
                 dt.Columns.Add("Жанр", typeof(string));
                 dt.Columns.Add("rowspan", typeof(int));
-                DbManager.AddConnectionString(connectionString);
 
                 using (DbManager db = new DbManager())
                 {
@@ -75,7 +72,6 @@ namespace OTS.Films
                     }
                     else dt.Rows[i]["rowspan"] = rowspan;
                 }
-                // менять значения сравнивая с предыдущим 1-2 -> 2-1-3 -> 3-1-2
                 MyRepeater.DataSource = dt;
                 MyRepeater.DataBind();
             }

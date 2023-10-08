@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddDirectorPage.aspx.cs" Inherits="OTS.Films.AddDirectorPage" %>
+﻿<%@ Title="Добавить нового режиссера" Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddDirectorPage.aspx.cs" Inherits="OTS.Films.AddDirectorPage" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
         <!-- Форма для добавления режиссера -->

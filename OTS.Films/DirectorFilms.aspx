@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DirectorFilms.aspx.cs" Inherits="OTS.Films.DirectorFilms" %>
+﻿<%@ Title="Фильмы режиссеров" Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DirectorFilms.aspx.cs" Inherits="OTS.Films.DirectorFilms" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
         <!-- Фильмы режиссера -->

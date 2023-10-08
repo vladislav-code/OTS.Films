@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddFilmPage.aspx.cs" Inherits="OTS.Films.AddFilmPage" %>
+﻿<%@ Title="Добавить новый фильм" Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddFilmPage.aspx.cs" Inherits="OTS.Films.AddFilmPage" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div style="height: 209px">
         <!-- Форма для добавления фильма -->

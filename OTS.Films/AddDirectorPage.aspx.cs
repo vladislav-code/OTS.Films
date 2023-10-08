@@ -21,18 +21,12 @@ namespace OTS.Films
         {
             // Получение данных из элементов управления
             string directorName = txtDirectorName.Text;
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            // Создание подключения к базе данных и выполнение операции вставки
-            DbManager.AddConnectionString(connectionString);
 
             using (DbManager db = new DbManager())
             {
                 try
                 {
-                    // SQL-запрос для вставки данных
-                    //var query = db.SetCommand("INSERT INTO Directors (name) VALUES (@name)", db.Parameter("@name", directorName)).ExecuteNonQuery();
-
-                    ////Создание объекта Director и установка свойства name
+                    //Создание объекта Director и установка свойства name
                     Director director = new Director { name = directorName };
 
                     // Вставка данных в таблицу с использованием BLToolkit
@@ -43,12 +37,8 @@ namespace OTS.Films
                     Console.WriteLine("An error occured " + ex.Message);
                 }
             }
-
             // Очистка элементов управления после вставки
             txtDirectorName.Text = string.Empty;
-
-            // Закрыть соединение???
-            // Сообщение об операции
         }
     }
 }

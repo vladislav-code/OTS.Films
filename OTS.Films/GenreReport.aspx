@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GenreReport.aspx.cs" Inherits="OTS.Films.GenreReport" %>
+﻿<%@ Title="Отчет по жанрам" Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GenreReport.aspx.cs" Inherits="OTS.Films.GenreReport" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
         <!-- Отчет по жанру -->

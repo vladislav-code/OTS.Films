@@ -34,12 +34,6 @@ namespace OTS.Films
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            //string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("Имя", typeof(string));
-            //DbManager.AddConnectionString(connectionString);
             string genre = ddlGenre.SelectedItem.Text;
             using (DbManager db = new DbManager())
             {

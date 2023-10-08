@@ -19,22 +19,18 @@ namespace OTS.Films
         {
             if (!IsPostBack)
             {
-                //Director director = new Director();
-                //Genre genre = new Genre();
                 using (DbManager db = new DbManager())
                 {
                     try
                     {
                         List<Director> directors = db.GetTable<Director>().ToList(); // Получение всех фильмов
-                                                                                     //List<Director> directors = director.GetDirectors();
-                                                                                     // Удалить дубликаты из списка режиссеров
+                        // Удалить дубликаты из списка режиссеров
                         directors = directors.GroupBy(d => d.name).Select(g => g.First()).ToList();
 
-                        lbDirectors.DataSource = directors; // здесь ошибка
+                        lbDirectors.DataSource = directors;
                         lbDirectors.DataBind();
 
                         List<Genre> genres = db.GetTable<Genre>().ToList();
-                        //List<Genre> genres = genre.GetGenres();
                         // Удалить дубликаты из списка жанров
                         genres = genres.GroupBy(g => g.name).Select(g => g.First()).ToList();
 
@@ -56,57 +52,24 @@ namespace OTS.Films
         {
             // Получение данных из элементов управления
             string filmTitle = txtFilmTitle.Text;
-            //List<Director> selectedDirectors = new List<Director>();
-            //foreach (ListItem item in lbDirectors.Items)
-            //{
-            //    if (item.Selected)
-            //    {
-            //        selectedDirectors.Add(item.Value);
-            //    }
-            //}
-            // Value = id
             string[] selectedDirectors = lbDirectors.GetSelectedIndices()
                                               .Select(i => lbDirectors.Items[i].Value)
                                               .ToArray();
-            // Получение выбранных режиссеров
-            //List<int> selectedDirectors = new List<int>();
-            //foreach (ListItem item in lbDirectors.Items)
-            //{
-            //    if (item.Selected)
-            //    {
-            //        int directorID;
-            //        if (int.TryParse(item.Value, out directorID))
-            //        {
-            //            selectedDirectors.Add(directorID);
-            //        }
-            //    }
-            //}
             string[] selectedGenres = lbGenres.GetSelectedIndices()
                                               .Select(i => lbGenres.Items[i].Value)
                                               .ToArray();
-
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            // Создание подключения к базе данных и выполнение операции вставки
-            DbManager.AddConnectionString(connectionString);
 
             using (DbManager db = new DbManager())
             {
                 try
                 {
-                    // try catch обработка
                     // проверка вставки такого же фильма
 
                     // Вставка фильма и получение его идентификатора
                     var film = new Film { title = filmTitle };
-                    // int film_id = (int)db.InsertWithIdentity(film);
                     db.Insert(film);
-                    int film_id = db.SetCommand("SELECT MAX(id) FROM Films;").ExecuteScalar<int>(); // получение id вставленного фильма
+                    int film_id = db.SetCommand("SELECT MAX(id) FROM Films;").ExecuteScalar<int>();
 
-                    // SQL-запрос для вставки qданных
-                    //var query = db.SetCommand("INSERT INTO Films (title) OUTPUT INSERTED.id VALUES (@title)", db.Parameter("@title", filmTitle));
-
-
-                    //int film_id = (int)query.ExecuteScalar();
                     foreach (string selectedDirector in selectedDirectors)
                     {
                         // Обновление записи режиссера, если film_id равен null
@@ -140,36 +103,18 @@ namespace OTS.Films
                         // Если обновление не затронуло ни одну запись, выполнить вставку новой записи
                         if (updatedRows == 0)
                         {
-                            // string genreName = lbGenres.Items[Convert.ToInt32(selectedGenre)].Text;
                             string genreName = lbGenres.Items.FindByValue(selectedGenre).Text;
-                            // Создайте новый объект Genre и заполните его свойства.
                             Genre genre = new Genre
                             {
                                 film_id = film_id,
                                 name = genreName
                             };
 
-                            // Вставьте новую запись в таблицу "Genres".
                             db.Insert(genre);
 
                             //TODO: переделать с id на name поиск
-                            //string genreName = lbGenres.Items[Convert.ToInt32(selectedGenre)].Text;
-                            //string insertGenreQuery = "INSERT INTO Genres (film_id, name) VALUES (@film_id, @genreName)";
-                            //db.SetCommand(insertGenreQuery,
-                            //    db.Parameter("@film_id", film_id),
-                            //    db.Parameter("@genreName", genreName)
-                            //).ExecuteNonQuery();
                         }
                     }
-
-                    //using (SqlCommand cmd = new SqlCommand(query, connection))
-                    //{
-                    //    // параметры для предотвращения SQL-инъекций
-                    //    cmd.Parameters.AddWithValue("@Title", filmTitle);
-
-                    //    // Выполнение запроса
-                    //    cmd.ExecuteNonQuery();
-                    //}
                 }
                 catch (Exception ex)
                 {
@@ -181,9 +126,6 @@ namespace OTS.Films
             txtFilmTitle.Text = string.Empty;
             lbDirectors.ClearSelection();
             lbGenres.ClearSelection();
-
-            // Закрыть соединение???
-            // Сообщение об операции
         }
     }
 }
