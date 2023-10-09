@@ -20,6 +20,7 @@ namespace OTS.Films
                     try
                     {
                         List<Genre> genres = db.GetTable<Genre>().ToList();
+                        // группировка
                         genres = genres.GroupBy(g => g.name).Select(g => g.First()).ToList();
 
                         ddlGenre.DataSource = genres;
@@ -34,6 +35,10 @@ namespace OTS.Films
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            if (ddlGenre.SelectedIndex == -1)
+            {
+                return;
+            }
             string genre = ddlGenre.SelectedItem.Text;
             using (DbManager db = new DbManager())
             {

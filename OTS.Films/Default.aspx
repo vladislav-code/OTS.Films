@@ -18,8 +18,9 @@
                         <tr>
                             <%--Выводим имя только в тех ячейках, где rowspan != 0 - признак того, что данная ячейка была объединена--%>
                             <%# Convert.ToInt32(Eval("rowspan")) > 0 ? "<td rowspan='" + Eval("rowspan") + "'>" + Eval("Название") + "</td>" : "" %> 
-                            <td><%# Eval("Режиссер") %></td>
-                            <td><%# Eval("Жанр") %></td>
+                            <%# Convert.ToInt32(Eval("rowspan1")) > 0 ? "<td rowspan='" + Eval("rowspan1") + "'>" + Eval("Режиссер") + "</td>" : "" %> 
+                            <%--<%# Convert.ToInt32(Eval("rowspan2")) > 0 ? "<td rowspan='" + Eval("rowspan2") + "'>" + Eval("Жанр") + "</td>" : "" %>--%>
+                            <td><%# Eval("Жанр").ToString() %></td>
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
